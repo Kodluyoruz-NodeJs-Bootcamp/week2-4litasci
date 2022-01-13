@@ -16,14 +16,7 @@ const User = require("./user");
 // Register
 app.post("/register", async (req, res) => {
     // Our register logic starts here
-    try{
-        const { fullname, email, password } = req.body;
-        console.log(req.headers['user-agent'])
-        res.status(201).json(fullname);
-    }catch (err) {
-        console.log(err);
-      }
-    return;
+    
   try {
     // Get user input
     const { fullname, email, password } = req.body;
@@ -49,10 +42,10 @@ app.post("/register", async (req, res) => {
       email: email.toLowerCase(),
       password: encryptedPassword,
     });
-
+    const useragent = req.headers['user-agent'];
     // Create token
     const token = jwt.sign(
-      { user_id: user._id, email },
+      { user_id: user._id, email ,useragent},
       process.env.TOKEN_KEY,
       {
         expiresIn: "3h",
