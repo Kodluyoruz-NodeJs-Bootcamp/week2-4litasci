@@ -51,9 +51,12 @@ export default class Register extends Component {
             }
         )
             .then(json => {
-                console.log(json.data.token)
-                this.changeResult(json.data.token)})
-            .catch(err => console.log(err));
+                console.log(json)
+                
+                window.location="/login"
+            })
+            .catch(err =>  {console.log(err)
+            this.changeResult(err.response.data)});
     }
 
     changeResult = (resultText) => {
