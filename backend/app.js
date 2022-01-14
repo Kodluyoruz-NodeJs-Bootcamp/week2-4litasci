@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const useragent = require("express-useragent");
 const cors = require("cors");
 const app = express();
-
+const auth = require("./auth");
 app.use(express.json());
 app.use(cors());
 
@@ -72,7 +72,7 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  // Our register logic starts here
+  // Login
 
   try {
     // Get user input
@@ -88,7 +88,7 @@ app.post("/login", async (req, res) => {
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
       const token = jwt.sign(
-        { user_id: user._id, email ,useragent},
+        { user_id: user._id, email, useragent },
         process.env.TOKEN_KEY,
         {
           expiresIn: "6h",
@@ -102,6 +102,16 @@ app.post("/login", async (req, res) => {
       res.status(200).json(user);
     }
     res.status(400).send("Invalid Credentials");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/list", auth, async (req, res) => {
+  // List Users
+
+  try {
+    // Get user input
   } catch (err) {
     console.log(err);
   }

@@ -77,7 +77,7 @@ export default class Login extends Component {
                 onChange={this.handlePassword}
               />
               <Button variant="contained" onClick={this.onLogin}>
-                register
+                Login
               </Button>
               <div> {this.state.resultvalue}</div>
             </Stack>
