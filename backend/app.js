@@ -110,11 +110,9 @@ app.post("/login", async (req, res) => {
 app.post("/list", auth, async (req, res) => {
   // List Users
 
-  try {
-    // Get user input
-  } catch (err) {
-    console.log(err);
-  }
+  User.find()
+    .then(users => res.json(users).send)
+    .catch(err => res.status(400).json('Error '+err).send);
 });
 
 module.exports = app;
